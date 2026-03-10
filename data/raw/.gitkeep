@@ -1,0 +1,6 @@
+# .gitkeep
+# This file ensures the directory is tracked by git even when empty
+#
+# IMPORTANT: Place your CSV data files here:
+# - Preprocessing1.csv
+# - DataPreprocessingGraded_dataset.csv

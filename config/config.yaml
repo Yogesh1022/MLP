@@ -1,0 +1,68 @@
+# ML Pipeline Configuration
+# =========================
+
+# Project Settings
+project:
+  name: "ml-pipeline-project"
+  version: "0.1.0"
+  description: "Machine Learning Pipeline for Flight Price Prediction"
+
+# Data Settings
+data:
+  raw_path: "data/raw"
+  processed_path: "data/processed"
+  train_test_split: 0.2
+  random_state: 42
+
+# Model Settings
+model:
+  type: "random_forest"  # Options: random_forest, gradient_boosting, linear_regression
+  parameters:
+    n_estimators: 100
+    max_depth: 10
+    random_state: 42
+  save_path: "models"
+
+# Feature Engineering
+features:
+  numeric:
+    - "Duration_seconds"
+    - "Month"
+  categorical:
+    - "Airline"
+    - "Source"
+    - "Destination"
+    - "WeekDay"
+    - "Additional_Info"
+  target: "Price"
+  
+# Preprocessing
+preprocessing:
+  numeric_imputation: "median"
+  categorical_imputation: "constant"
+  scaling: "standard"  # Options: standard, minmax, robust
+  encoding: "onehot"   # Options: onehot, label, target
+
+# Training Settings
+training:
+  cv_folds: 5
+  metrics:
+    - "mse"
+    - "rmse"
+    - "mae"
+    - "r2"
+  
+# Logging
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/pipeline.log"
+
+# Paths
+paths:
+  notebooks: "notebooks"
+  src: "src"
+  tests: "tests"
+  docs: "docs"
+  models: "models"
+  config: "config"

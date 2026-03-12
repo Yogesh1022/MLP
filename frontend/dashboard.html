@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ML Pipeline | Dashboard Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="dashboard-layout d-flex">
+      <aside class="sidebar p-3" id="sidebar">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <strong class="brand-font">ML Pipeline</strong>
+          <button class="btn btn-sm btn-outline-secondary d-lg-none" id="closeSidebar" type="button">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <nav class="nav flex-column">
+          <a class="nav-link active" href="#" data-section="overview"><i class="bi bi-speedometer2"></i>Overview</a>
+          <a class="nav-link" href="#" data-section="upload"><i class="bi bi-upload"></i>Data Upload</a>
+          <a class="nav-link" href="#" data-section="pipeline"><i class="bi bi-diagram-3"></i>Processing Pipeline</a>
+          <a class="nav-link" href="#" data-section="features"><i class="bi bi-sliders2"></i>Feature Extraction</a>
+          <a class="nav-link" href="#" data-section="ai"><i class="bi bi-cpu"></i>Model / AI Module</a>
+          <a class="nav-link" href="#" data-section="results"><i class="bi bi-lightbulb"></i>Results & Insights</a>
+          <a class="nav-link" href="#" data-section="visualizations"><i class="bi bi-graph-up-arrow"></i>Visualizations</a>
+          <a class="nav-link" href="#" data-section="logs"><i class="bi bi-activity"></i>Logs / Activity</a>
+          <a class="nav-link" href="#" data-section="settings"><i class="bi bi-gear"></i>Settings</a>
+        </nav>
+      </aside>
+
+      <div class="content-wrap">
+        <header class="topbar px-3 px-lg-4 py-3 d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-outline-secondary d-lg-none" id="openSidebar" type="button">
+              <i class="bi bi-list"></i>
+            </button>
+            <h1 class="h5 mb-0 brand-font">Flight Price Intelligence Dashboard</h1>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <button class="btn btn-outline-secondary theme-switch" id="themeToggle" type="button" title="Toggle Theme">
+              <i class="bi bi-moon-stars"></i>
+            </button>
+            <button class="btn btn-outline-secondary position-relative" type="button">
+              <i class="bi bi-bell"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">4</span>
+            </button>
+            <div class="btn btn-outline-secondary d-flex align-items-center gap-2">
+              <i class="bi bi-person-circle"></i>
+              <span class="d-none d-md-inline">Demo Analyst</span>
+            </div>
+          </div>
+        </header>
+
+        <main class="p-3 p-lg-4">
+          <section class="section-panel active" id="section-overview">
+            <div class="row g-3 mb-4">
+              <div class="col-sm-6 col-xl-3"><div class="metric-card"><div class="small text-secondary">Rows Processed</div><div class="metric-value">18,420</div></div></div>
+              <div class="col-sm-6 col-xl-3"><div class="metric-card"><div class="small text-secondary">Active Pipelines</div><div class="metric-value">6</div></div></div>
+              <div class="col-sm-6 col-xl-3"><div class="metric-card"><div class="small text-secondary">Best R2 Score</div><div class="metric-value">0.91</div></div></div>
+              <div class="col-sm-6 col-xl-3"><div class="metric-card"><div class="small text-secondary">Avg Inference Time</div><div class="metric-value">182 ms</div></div></div>
+            </div>
+            <div class="row g-3">
+              <div class="col-lg-8">
+                <div class="card-soft p-3 p-lg-4 h-100">
+                  <h2 class="h6 mb-3">System Status</h2>
+                  <div class="row g-3">
+                    <div class="col-md-4"><span class="status-dot status-ok"></span>Data Connector: Healthy</div>
+                    <div class="col-md-4"><span class="status-dot status-ok"></span>ETL Jobs: Running</div>
+                    <div class="col-md-4"><span class="status-dot status-warn"></span>Model Retrain: Scheduled</div>
+                  </div>
+                  <hr />
+                  <h3 class="h6 mb-2">Recent Activity</h3>
+                  <ul class="mb-0 text-secondary">
+                    <li>11:38 - Raw dataset imported from data/raw.</li>
+                    <li>11:42 - Missing value handling completed with median strategy.</li>
+                    <li>11:48 - Feature extraction generated 14 engineered columns.</li>
+                    <li>11:54 - RandomForestRegressor retraining started.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card-soft p-3 p-lg-4 h-100">
+                  <h2 class="h6 mb-3">Throughput</h2>
+                  <canvas id="throughputChart" height="220"></canvas>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-panel" id="section-upload">
+            <div class="card-soft p-3 p-lg-4 mb-3">
+              <h2 class="h6">Dataset Upload</h2>
+              <p class="text-secondary small">Upload CSV documents for preprocessing and prediction workflows.</p>
+              <div class="border border-2 border-dashed rounded-3 p-4 text-center">
+                <i class="bi bi-cloud-arrow-up fs-2 text-info"></i>
+                <p class="mb-2">Drag and drop files here</p>
+                <button class="btn btn-primary">Browse Files</button>
+              </div>
+            </div>
+            <div class="card-soft p-3 p-lg-4">
+              <h3 class="h6">File Preview</h3>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead><tr><th>Airline</th><th>Source</th><th>Destination</th><th>Duration</th><th>Price</th></tr></thead>
+                  <tbody>
+                    <tr><td>IndiGo</td><td>Delhi</td><td>Mumbai</td><td>2h 10m</td><td>5230</td></tr>
+                    <tr><td>Vistara</td><td>Bangalore</td><td>Kolkata</td><td>2h 45m</td><td>6810</td></tr>
+                    <tr><td>Air India</td><td>Chennai</td><td>Delhi</td><td>3h 05m</td><td>7490</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-panel" id="section-pipeline">
+            <div class="card-soft p-3 p-lg-4 mb-3">
+              <h2 class="h6 mb-3">Processing Pipeline</h2>
+              <div class="progress-steps mb-3">
+                <div class="step"><strong>1. Ingestion</strong><small class="text-secondary">Completed</small></div>
+                <div class="step"><strong>2. Cleaning</strong><small class="text-secondary">Completed</small></div>
+                <div class="step"><strong>3. Feature Build</strong><small class="text-secondary">In Progress</small></div>
+                <div class="step"><strong>4. Model Fit</strong><small class="text-secondary">Queued</small></div>
+              </div>
+              <div class="mb-3"><label class="small">Data Cleaning</label><div class="progress"><div class="progress-bar bg-success" style="width: 100%">100%</div></div></div>
+              <div class="mb-3"><label class="small">Feature Extraction</label><div class="progress"><div class="progress-bar" style="width: 72%">72%</div></div></div>
+              <div><label class="small">Model Processing</label><div class="progress"><div class="progress-bar bg-warning" style="width: 35%">35%</div></div></div>
+            </div>
+          </section>
+
+          <section class="section-panel" id="section-features">
+            <div class="card-soft p-3 p-lg-4">
+              <h2 class="h6 mb-3">Feature Extraction Summary</h2>
+              <div class="row g-3">
+                <div class="col-md-4"><div class="metric-card"><div class="small text-secondary">Raw Features</div><div class="metric-value">11</div></div></div>
+                <div class="col-md-4"><div class="metric-card"><div class="small text-secondary">Engineered Features</div><div class="metric-value">14</div></div></div>
+                <div class="col-md-4"><div class="metric-card"><div class="small text-secondary">Selected Features</div><div class="metric-value">9</div></div></div>
+              </div>
+              <hr />
+              <ul class="text-secondary mb-0">
+                <li>Created WeekendFlag from departure date.</li>
+                <li>Encoded Source-Destination route pair frequency.</li>
+                <li>Normalized duration into total seconds.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="section-panel" id="section-ai">
+            <div class="row g-3">
+              <div class="col-lg-7">
+                <div class="card-soft p-3 p-lg-4 h-100">
+                  <h2 class="h6 mb-3">Model Information</h2>
+                  <p class="text-secondary mb-2"><strong>Primary Model:</strong> RandomForestRegressor</p>
+                  <p class="text-secondary mb-2"><strong>Fallback Model:</strong> GradientBoostingRegressor</p>
+                  <p class="text-secondary mb-3"><strong>Hyperparameter Search:</strong> GridSearchCV (24 trials)</p>
+                  <h3 class="h6">Training Status</h3>
+                  <div class="progress mb-2"><div class="progress-bar" style="width: 68%">Epoch 68%</div></div>
+                  <small class="text-secondary">ETA: 4m 20s</small>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="card-soft p-3 p-lg-4 h-100">
+                  <h2 class="h6 mb-3">Performance Metrics</h2>
+                  <canvas id="performanceChart" height="220"></canvas>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-panel" id="section-results">
+            <div class="card-soft p-3 p-lg-4">
+              <h2 class="h6 mb-3">Results & Insights</h2>
+              <div class="row g-3 mb-3">
+                <div class="col-md-6"><div class="metric-card"><strong>Output Summary</strong><p class="small text-secondary mb-0">Predicted fare bands are most sensitive to route frequency, airline class, and month seasonality.</p></div></div>
+                <div class="col-md-6"><div class="metric-card"><strong>Key Insight</strong><p class="small text-secondary mb-0">Weekend routes show 11.8% average premium compared to weekday flights.</p></div></div>
+              </div>
+              <h3 class="h6">Example AI Output</h3>
+              <pre class="p-3 rounded-3" style="background: var(--bg-muted); border: 1px solid var(--border);">{
+  "route": "DEL-BOM",
+  "predicted_price": 6120,
+  "confidence": 0.89,
+  "recommendation": "Monitor price for 24h before booking"
+}</pre>
+            </div>
+          </section>
+
+          <section class="section-panel" id="section-visualizations">
+            <div class="row g-3">
+              <div class="col-lg-6"><div class="card-soft p-3 p-lg-4"><h2 class="h6">Price Trend by Month</h2><canvas id="priceTrendChart" height="220"></canvas></div></div>
+              <div class="col-lg-6"><div class="card-soft p-3 p-lg-4"><h2 class="h6">Route Demand Distribution</h2><canvas id="routeChart" height="220"></canvas></div></div>
+              <div class="col-12">
+                <div class="card-soft p-3 p-lg-4">
+                  <h2 class="h6">Flow Diagram (Pipeline Stages)</h2>
+                  <div class="row g-2 text-center">
+                    <div class="col-md"><div class="metric-card">Data Ingestion</div></div>
+                    <div class="col-md"><div class="metric-card">Cleaning</div></div>
+                    <div class="col-md"><div class="metric-card">Feature Engineering</div></div>
+                    <div class="col-md"><div class="metric-card">Model Training</div></div>
+                    <div class="col-md"><div class="metric-card">Insights</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-panel" id="section-logs">
+            <div class="card-soft p-3 p-lg-4">
+              <h2 class="h6 mb-3">Timeline of Operations</h2>
+              <div class="log-item"><strong>11:31</strong> Dataset checksum verified and loaded.</div>
+              <div class="log-item"><strong>11:37</strong> Null values handled with grouped median imputation.</div>
+              <div class="log-item"><strong>11:43</strong> Feature extraction completed for temporal fields.</div>
+              <div class="log-item"><strong>11:50</strong> Model benchmarking launched across 3 regressors.</div>
+              <div class="log-item mb-0"><strong>11:57</strong> Insight summary exported to reporting module.</div>
+            </div>
+          </section>
+
+          <section class="section-panel" id="section-settings">
+            <div class="card-soft p-3 p-lg-4">
+              <h2 class="h6 mb-3">Settings</h2>
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" id="settingAutoRetrain" checked>
+                <label class="form-check-label" for="settingAutoRetrain">Enable automatic nightly retraining</label>
+              </div>
+              <div class="form-check form-switch mb-3">
+                <input class="form-check-input" type="checkbox" id="settingAlert" checked>
+                <label class="form-check-label" for="settingAlert">Send notifications on model drift detection</label>
+              </div>
+              <label class="form-label">Pipeline Runtime Priority</label>
+              <select class="form-select w-auto">
+                <option selected>Balanced</option>
+                <option>Speed Optimized</option>
+                <option>Accuracy Optimized</option>
+              </select>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

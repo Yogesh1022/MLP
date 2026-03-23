@@ -187,3 +187,15 @@ checkpoints/
 
 # uv
 .uv/
+# Ignore data files
+*.csv
+*.parquet
+
+# Ignore notebooks if needed
+*.ipynb
+
+# Or specific folders
+Algorithms/supervised/NLP_pipeline/data
+Algorithms/supervised/NLP_pipeline/data/
+Algorithms/supervised/NLP_pipeline/data/**
+notebooks/
